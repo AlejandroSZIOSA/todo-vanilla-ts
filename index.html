@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="todoForm">
+      <h2>Todo</h2>
+      <label for="todoTitle">title:</label>
+      <input type="text" id="todoTitle" name="todoTitle" required /><br /><br />
+      <label for="todoDescription">description:</label>
+      <input
+        type="text"
+        id="todoDescription"
+        name="todoDescription"
+        required
+      /><br /><br />
+      <button type="submit">Add Todo</button>
+    </form>
+    <ul id="todoList"></ul>
+  </body>
+  <script src="script.js"></script>
+</html>
