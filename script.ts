@@ -11,7 +11,6 @@ const todoDescriptionEl = document.getElementById(
   "todoDescription"
 ) as HTMLInputElement;
 const formEl = document.getElementById("todoForm") as HTMLFormElement;
-
 const todoListEl = document.getElementById("todoList") as HTMLUListElement;
 
 //fn expression
@@ -26,9 +25,9 @@ const addTodo = (e: Event): void => {
 
   const todoItemEl = document.createElement("li") as HTMLLIElement;
   todoItemEl.innerHTML = `<h2>${newTodo.title}</h2><p>${newTodo.description}</p>
-  <button id="removeBtn">Remove</button>
+  <button>Remove</button>
   <input id="radioComplete" type="radio" name="completion-${newTodo.title}">Complete
-  <input id="radioUncomplete" type="radio" name="completion-${newTodo.title}">unComplete
+  <input id="radioUncomplete" type="radio" name="completion-${newTodo.title}"checked>unComplete
   `;
 
   const todoTitleHeadingEl = todoItemEl.querySelector(
@@ -40,10 +39,9 @@ const addTodo = (e: Event): void => {
 
   todoListEl.appendChild(todoItemEl);
 
-  const removeBtnEl = todoItemEl.querySelector(
-    "#removeBtn"
-  ) as HTMLButtonElement;
+  const removeBtnEl = todoItemEl.querySelector("button") as HTMLButtonElement;
 
+  //Event Listener for Remove Button
   removeBtnEl.addEventListener("click", () => {
     todoListEl.removeChild(todoItemEl);
     const index = todos.indexOf(newTodo);
@@ -60,12 +58,14 @@ const addTodo = (e: Event): void => {
     "#radioUncomplete"
   ) as HTMLInputElement;
 
+  //Event Listeners for Radio Buttons
   radioCompleteEl.addEventListener("change", () => {
     newTodo.isCompleted = true;
     todoTitleHeadingEl.style.textDecoration = "line-through";
     todoDescriptionParaEl.style.textDecoration = "line-through";
   });
 
+  //Event Listener for Uncomplete Radio Button
   radioUncompleteEl.addEventListener("change", () => {
     newTodo.isCompleted = false;
     todoTitleHeadingEl.style.textDecoration = "none";
@@ -75,4 +75,5 @@ const addTodo = (e: Event): void => {
   formEl.reset();
 };
 
+//Event Listener for Form Submission
 formEl.addEventListener("submit", addTodo);

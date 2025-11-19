@@ -13,11 +13,12 @@ var addTodo = function (e) {
     };
     todos.push(newTodo);
     var todoItemEl = document.createElement("li");
-    todoItemEl.innerHTML = "<h2>".concat(newTodo.title, "</h2><p>").concat(newTodo.description, "</p>\n  <button id=\"removeBtn\">Remove</button>\n  <input id=\"radioComplete\" type=\"radio\" name=\"completion-").concat(newTodo.title, "\">Complete\n  <input id=\"radioUncomplete\" type=\"radio\" name=\"completion-").concat(newTodo.title, "\">unComplete\n  ");
+    todoItemEl.innerHTML = "<h2>".concat(newTodo.title, "</h2><p>").concat(newTodo.description, "</p>\n  <button>Remove</button>\n  <input id=\"radioComplete\" type=\"radio\" name=\"completion-").concat(newTodo.title, "\">Complete\n  <input id=\"radioUncomplete\" type=\"radio\" name=\"completion-").concat(newTodo.title, "\"checked>unComplete\n  ");
     var todoTitleHeadingEl = todoItemEl.querySelector("h2");
     var todoDescriptionParaEl = todoItemEl.querySelector("p");
     todoListEl.appendChild(todoItemEl);
-    var removeBtnEl = todoItemEl.querySelector("#removeBtn");
+    var removeBtnEl = todoItemEl.querySelector("button");
+    //Event Listener for Remove Button
     removeBtnEl.addEventListener("click", function () {
         todoListEl.removeChild(todoItemEl);
         var index = todos.indexOf(newTodo);
@@ -27,11 +28,13 @@ var addTodo = function (e) {
     });
     var radioCompleteEl = todoItemEl.querySelector("#radioComplete");
     var radioUncompleteEl = todoItemEl.querySelector("#radioUncomplete");
+    //Event Listeners for Radio Buttons
     radioCompleteEl.addEventListener("change", function () {
         newTodo.isCompleted = true;
         todoTitleHeadingEl.style.textDecoration = "line-through";
         todoDescriptionParaEl.style.textDecoration = "line-through";
     });
+    //Event Listener for Uncomplete Radio Button
     radioUncompleteEl.addEventListener("change", function () {
         newTodo.isCompleted = false;
         todoTitleHeadingEl.style.textDecoration = "none";
@@ -39,4 +42,5 @@ var addTodo = function (e) {
     });
     formEl.reset();
 };
+//Event Listener for Form Submission
 formEl.addEventListener("submit", addTodo);
