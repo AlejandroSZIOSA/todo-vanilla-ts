@@ -25,11 +25,18 @@ const addTodo = (e: Event): void => {
   todos.push(newTodo);
 
   const todoItemEl = document.createElement("li") as HTMLLIElement;
-  todoItemEl.innerHTML = `<h3>${newTodo.title}</h3><p>${newTodo.description}</p>
+  todoItemEl.innerHTML = `<h2>${newTodo.title}</h2><p>${newTodo.description}</p>
   <button id="removeBtn">Remove</button>
   <input id="radioComplete" type="radio" name="completion-${newTodo.title}">Complete
   <input id="radioUncomplete" type="radio" name="completion-${newTodo.title}">unComplete
   `;
+
+  const todoTitleHeadingEl = todoItemEl.querySelector(
+    "h2"
+  ) as HTMLHeadingElement;
+  const todoDescriptionParaEl = todoItemEl.querySelector(
+    "p"
+  ) as HTMLParagraphElement;
 
   todoListEl.appendChild(todoItemEl);
 
@@ -55,12 +62,14 @@ const addTodo = (e: Event): void => {
 
   radioCompleteEl.addEventListener("change", () => {
     newTodo.isCompleted = true;
-    console.log(todos);
+    todoTitleHeadingEl.style.textDecoration = "line-through";
+    todoDescriptionParaEl.style.textDecoration = "line-through";
   });
 
   radioUncompleteEl.addEventListener("change", () => {
     newTodo.isCompleted = false;
-    console.log(todos);
+    todoTitleHeadingEl.style.textDecoration = "none";
+    todoDescriptionParaEl.style.textDecoration = "none";
   });
 
   formEl.reset();
